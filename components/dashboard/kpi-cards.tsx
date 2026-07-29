@@ -19,7 +19,7 @@ const sparkBars = [5, 9, 7, 12, 10, 15] as const;
 
 export function KpiCards({ projects, assignments, team, isLoading }: { projects: DashboardRow[]; assignments: DashboardRow[]; team: DashboardRow[]; isLoading: boolean }) {
   const { currencySymbol } = useWorkspaceIdentity();
-  if (isLoading) return <div className="grid grid-cols-7 gap-2">{Array.from({ length: 7 }, (_, index) => <Skeleton className="h-[136px] min-w-0" key={`metric-skeleton-${index}`} />)}</div>;
+  if (isLoading) return <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7">{Array.from({ length: 7 }, (_, index) => <Skeleton className="h-[136px] min-w-0" key={`metric-skeleton-${index}`} />)}</div>;
 
   const assignmentStatus = (pattern: RegExp) => assignments.filter((item) => pattern.test(statusValue(item))).length;
   const activeProjects = projects.filter((project) => !/complete|deliver|archive|cancel/i.test(statusValue(project))).length;
@@ -37,7 +37,7 @@ export function KpiCards({ projects, assignments, team, isLoading }: { projects:
     { label: "Revenue", value: `${currencySymbol}0`, description: "From available budgets", icon: Banknote, glow: "#8b7cff", trend: "Month" },
   ];
 
-  return <section aria-label="Business metrics" className="grid grid-cols-7 gap-2">{metrics.map((metric) => <KpiMetric key={metric.label} metric={metric} />)}</section>;
+  return <section aria-label="Business metrics" className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7">{metrics.map((metric) => <KpiMetric key={metric.label} metric={metric} />)}</section>;
 }
 
 function KpiMetric({ metric }: { metric: Metric }) {

@@ -249,6 +249,49 @@
 
 @keyframes cfy-shimmer { to { transform: translate3d(110%,0,0); } }
 @keyframes cfy-skeleton-enter { from { opacity: 0; } to { opacity: 1; } }
+
+/* Shared responsive guardrails for every workspace surface. */
+html[data-mobile-nav="open"] .cfy-sidebar { transform: translateX(0); }
+html[data-mobile-nav="open"] .cfy-mobile-nav-backdrop { display: block; }
+.cfy-sidebar button[aria-label="Collapse navigation"],
+.cfy-sidebar button[aria-label="Expand navigation"] { display: none; }
+
+@media (max-width: 639px) {
+  .cfy-card,
+  .cfy-kpi { border-radius: 16px; }
+  .cfy-card-head { padding: 0.875rem 1rem; }
+  .cfy-modal {
+    width: 100%;
+    max-width: calc(100vw - 1rem);
+    max-height: calc(100svh - 1rem);
+    overflow-y: auto;
+    border-radius: 18px;
+    padding: 1rem;
+  }
+  .cfy-table { min-width: 680px; }
+  .cfy-table th { padding: 0.625rem 0.75rem; }
+  .cfy-table td { padding: 0.75rem; }
+  .cfy-primary-button,
+  .cfy-control,
+  .auth-input,
+  .auth-submit { min-height: 44px; }
+  .cfy-assignment-form-top { padding: 1rem; }
+  .cfy-assignment-section { padding: 1.25rem 1rem; }
+  .cfy-assignment-form-footer { padding: 0.875rem 1rem; }
+  .cfy-shell main > section.grid-cols-4 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .cfy-shell h1 { overflow-wrap: anywhere; }
+}
+
+@media (min-width: 420px) and (max-width: 639px) {
+  .cfy-shell main > section.grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  html[data-mobile-nav="open"] .cfy-mobile-nav-backdrop { display: none; }
+  .cfy-sidebar button[aria-label="Collapse navigation"],
+  .cfy-sidebar button[aria-label="Expand navigation"] { display: flex; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cfy-skeleton::after { animation: none; opacity: .32; transform: translate3d(0,0,0); }
   .cfy-skeleton-group { animation: none; }
