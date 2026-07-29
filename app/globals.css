@@ -126,10 +126,15 @@
     @apply bg-background text-foreground;
     background-image: radial-gradient(circle at 76% -14%, rgba(121, 99, 255, .12), transparent 34rem), radial-gradient(circle at 8% 110%, rgba(24, 164, 220, .045), transparent 30rem);
     letter-spacing: -0.01em;
+    overflow-x: clip;
   }
   html {
     @apply font-sans;
+    min-width: 320px;
+    scroll-padding-top: 6rem;
   }
+  button, a, input, select, textarea { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0d14]; }
+  img, svg, video, canvas { max-width: 100%; }
 }
 
 @layer components {
@@ -170,6 +175,7 @@
   .cfy-skeleton-group { animation: cfy-skeleton-enter .24s ease-out both; }
   .cfy-list-row { @apply transition duration-200; }
   .cfy-list-row:hover { @apply bg-white/[.035]; }
+  .cfy-virtual-item { content-visibility: auto; contain-intrinsic-size: auto 88px; }
   .cfy-fade-up { animation: cfy-fade-up .55s var(--cfy-ease) both; }
   .cfy-fade-up-delay-1 { animation-delay: .06s; }
   .cfy-fade-up-delay-2 { animation-delay: .12s; }
@@ -189,7 +195,7 @@
   .cfy-table td:first-child { @apply rounded-l-xl; }
   .cfy-table td:last-child { @apply rounded-r-xl; }
   .cfy-badge { @apply inline-flex items-center gap-1.5 rounded-full border border-white/[.09] bg-white/[.045] px-2.5 py-1 text-[11px] font-medium text-zinc-300; }
-  .cfy-modal { @apply rounded-[24px] border border-white/[.12] bg-[#19191f]/90 p-6 backdrop-blur-2xl; box-shadow: var(--cfy-shadow-lg); }
+  .cfy-modal { @apply max-h-[calc(100svh-1rem)] max-w-[calc(100vw-1rem)] overflow-y-auto rounded-[24px] border border-white/[.12] bg-[#19191f]/90 p-5 backdrop-blur-2xl sm:max-h-[calc(100svh-2.5rem)] sm:max-w-[calc(100vw-2.5rem)] sm:p-6; box-shadow: var(--cfy-shadow-lg); }
   .auth-field { @apply block space-y-2 text-sm font-medium text-zinc-200; }
   .auth-field small { @apply block text-xs font-normal text-red-300; }
   .auth-input { @apply h-11 w-full rounded-xl border border-white/[.11] bg-white/[.055] px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 hover:border-white/[.18] focus:border-violet-300/70 focus:bg-white/[.075] focus:ring-4 focus:ring-violet-500/10; box-shadow: inset 0 1px rgba(255,255,255,.025); }
@@ -205,7 +211,7 @@
   .cfy-assignment-input { @apply h-11 w-full rounded-xl border border-[#293953] bg-[#0d1626] px-3 text-[#edf1f7] outline-none transition placeholder:text-[#70809a] hover:border-[#3a4d6c] focus:border-[#ff3562] focus:ring-4 focus:ring-[#ff3562]/10; }
   .cfy-assignment-priority { @apply inline-flex h-10 items-center gap-2 rounded-lg border border-[#293953] bg-[#0d1626] px-4 text-sm font-medium text-[#afbacb] transition hover:border-[#4d5c76] hover:text-white; }
   .cfy-assignment-priority-active { @apply border-[#ff3562]/70 bg-[#ff3562]/10 text-[#fff1f4]; box-shadow: inset 0 0 0 1px rgba(255, 53, 98, .1); }
-  .cfy-assignment-form-footer { @apply sticky bottom-0 flex justify-end gap-3 border-t border-[#263650] bg-[#0d1422]/95 px-6 py-5 backdrop-blur-xl sm:px-12; }
+  .cfy-assignment-form-footer { @apply sticky bottom-0 flex flex-col justify-end gap-3 border-t border-[#263650] bg-[#0d1422]/95 px-6 py-5 backdrop-blur-xl sm:flex-row sm:px-12; }
   .cfy-assignment-close { @apply flex size-10 items-center justify-center rounded-xl border border-[#2a3a54] bg-[#111c2e] text-[#aab7cb] transition hover:border-[#ff3562]/50 hover:bg-[#ff3562]/10 hover:text-[#ff8aa3]; }
   .cfy-assignment-secondary { @apply inline-flex h-11 items-center justify-center rounded-xl border border-[#2b3c57] bg-[#111a2a] px-4 text-sm font-semibold text-[#c2ccdb] transition hover:bg-[#18243a]; }
   .cfy-assignment-submit { @apply inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#ff1d55] px-5 text-sm font-semibold text-white transition hover:bg-[#ff3b69] disabled:pointer-events-none disabled:opacity-60; box-shadow: 0 10px 24px rgba(255, 29, 85, .28), inset 0 1px rgba(255, 255, 255, .22); }

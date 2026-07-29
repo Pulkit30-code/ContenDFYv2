@@ -25,7 +25,8 @@ export function useGlobalCommandCenter() { return useContext(CommandContext); }
 export function GlobalCommandCenterProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false); const [session, setSession] = useState(0);
-  useEffect(() => { const onKey = (event: KeyboardEvent) => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); setOpen(true); } }; window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey); }, []);
+  useEffect(() => { const onKey = (event: KeyboardEvent) => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); setOpen(true); } if (event.key === "Escape") setOpen(false); }; window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey); }, []);
+  useEffect(() => { if (!open) return; const previous = document.body.style.overflow; document.body.style.overflow = "hidden"; return () => { document.body.style.overflow = previous; }; }, [open]);
   const openPalette = useCallback(() => { setSession((value) => value + 1); setOpen(true); }, []);
   const closePalette = useCallback(() => setOpen(false), []);
   return <CommandContext.Provider value={{ open: openPalette }}>{children}{pathname.startsWith("/workspace") && <WorkspaceCommandCenter key={session} open={open} onClose={closePalette} />}</CommandContext.Provider>;
