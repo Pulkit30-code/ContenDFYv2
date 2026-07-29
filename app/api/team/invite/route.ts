@@ -61,10 +61,10 @@ export async function POST(request: Request) {
     // In local development return to the app instance handling this request,
     // not a stale configured public URL such as localhost:4173.
     const redirectOrigin = process.env.NODE_ENV === "production" ? getAppUrl() : "http://localhost:3000";
-    const redirectTo = new URL("/auth/callback", redirectOrigin);
-    // An invitation confirms the user but does not create a password. Always
-    // take first-time invitees to the authenticated password-setup screen.
-    redirectTo.searchParams.set("next", "/auth/create-password");
+    // Admin invite links return their one-time session in a URL fragment,
+    // unlike browser-initiated PKCE flows. The dedicated gate consumes that
+    // fragment locally, clears it, then validates the database invitation.
+    const redirectTo = new URL("/auth/create-password", redirectOrigin);
     const { data: invitation, error: invitationError } = await admin.auth.admin.inviteUserByEmail(payload.data.email, {
       redirectTo: redirectTo.toString(),
       data: { full_name: payload.data.name },

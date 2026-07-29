@@ -14,6 +14,17 @@ const passwordSchema = z.object({
   confirmation: z.string(),
 }).refine((data) => data.password === data.confirmation, { path: ["confirmation"], message: "Passwords do not match." });
 
+export async function GET() {
+  try {
+    const auth = await requireAuthenticatedServerContext("GET /api/auth/activate-invitation");
+    const invitation = await getInvitationActivationState(auth.user);
+    return NextResponse.json(invitation, { status: invitation.kind === "pending" ? 200 : invitation.kind === "expired" ? 410 : invitation.kind === "activated" ? 409 : 400, headers: { "Cache-Control": "no-store" } });
+  } catch (error) {
+    if (isSessionExpiredError(error)) return NextResponse.json({ kind: "invalid", email: null }, { status: 401, headers: { "Cache-Control": "no-store" } });
+    return NextResponse.json({ kind: "invalid", email: null }, { status: 500, headers: { "Cache-Control": "no-store" } });
+  }
+}
+
 export async function POST(request: Request) {
   const requestOrigin = new URL(request.url).origin;
   const origin = request.headers.get("origin");
