@@ -12,9 +12,16 @@ export function CreatePasswordGate() {
     let active = true;
     const validate = async () => {
       const supabase = createClient();
-      // Supabase consumes its implicit invite fragment locally. Remove the
-      // fragment immediately afterward so credentials never remain in history.
-      await supabase.auth.getSession();
+      // Admin invite links use an implicit fragment rather than a PKCE code.
+      // Consume it only in memory, then remove it before any application call.
+      const fragment = new URLSearchParams(window.location.hash.slice(1));
+      const accessToken = fragment.get("access_token");
+      const refreshToken = fragment.get("refresh_token");
+      if (accessToken && refreshToken) {
+        await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
+      } else {
+        await supabase.auth.getSession();
+      }
       if (window.location.hash) window.history.replaceState({}, "", "/auth/create-password");
 
       const response = await fetch("/api/auth/activate-invitation", {
