@@ -1,0 +1,335 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "../styles/tokens.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-heading: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: #0a0a0b;
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-image: radial-gradient(circle at 76% -14%, rgba(121, 99, 255, .12), transparent 34rem), radial-gradient(circle at 8% 110%, rgba(24, 164, 220, .045), transparent 30rem);
+    letter-spacing: -0.01em;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  .cfy-shell { @apply relative min-h-svh overflow-x-hidden; background: radial-gradient(ellipse 72% 38% at 72% -8%, rgba(113, 88, 255, .08), transparent), #0b0d14; }
+  .cfy-shell::before { content: ""; @apply pointer-events-none absolute inset-0 opacity-40; background-image: linear-gradient(var(--cfy-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--cfy-grid-line) 1px, transparent 1px); background-size: 64px 64px; mask-image: linear-gradient(to bottom, black, transparent 52%); }
+  .cfy-sidebar { @apply border-r border-white/[.08]; height: 100svh; background: #0d0f18; box-shadow: inset -1px 0 rgba(255,255,255,.018); }
+  .cfy-topbar { @apply border-b border-white/[.08]; background: rgba(13,15,24,.88); box-shadow: inset 0 -1px rgba(255,255,255,.015); backdrop-filter: blur(18px); }
+  .cfy-card { @apply relative overflow-hidden rounded-[20px] border border-white/[.09] transition duration-300; background: linear-gradient(145deg, #131c2f, #101827); box-shadow: 0 16px 42px rgba(0,0,0,.16), inset 0 1px rgba(255,255,255,.025); }
+  .cfy-card::before { content: ""; @apply pointer-events-none absolute inset-x-0 top-0 h-px; background: linear-gradient(90deg, transparent, rgba(193,182,255,.28), transparent); }
+  .cfy-card::after { content: ""; @apply pointer-events-none absolute -right-20 -top-24 size-48 rounded-full blur-3xl; background: rgba(139,124,255,.055); }
+  .cfy-card:hover { border-color: rgba(193,182,255,.18); transform: translateY(-2px); background: linear-gradient(145deg, #172138, #111a2b); box-shadow: 0 22px 48px rgba(0,0,0,.22), 0 0 32px rgba(110,91,255,.05); }
+  .cfy-card-head { @apply border-b border-white/[.07] px-5 py-4; background: rgba(255,255,255,.018); }
+  .cfy-control { @apply border border-white/[.09] bg-white/[.045] text-zinc-200 outline-none transition duration-200; border-radius: var(--cfy-radius-sm); box-shadow: inset 0 1px rgba(255,255,255,.045), 0 4px 18px rgba(0,0,0,.09); }
+  .cfy-control:hover { @apply border-white/[.16] bg-white/[.065]; }
+  .cfy-control:focus-within { border-color: rgba(169,157,255,.65); box-shadow: 0 0 0 4px rgba(139,124,255,.12), inset 0 1px rgba(255,255,255,.04); }
+  .cfy-icon-button { @apply flex items-center justify-center text-zinc-400 transition duration-200; border-radius: 12px; }
+  .cfy-icon-button:hover { @apply bg-white/[.07] text-zinc-100; transform: translateY(-1px); }
+  .cfy-primary-button { @apply inline-flex items-center justify-center gap-1.5 px-3 text-xs font-semibold text-white transition duration-200; border-radius: 12px; background: linear-gradient(135deg, #9b87ff, #6956dd); box-shadow: 0 10px 26px rgba(104,85,238,.28), inset 0 1px rgba(255,255,255,.3); }
+  .cfy-primary-button:hover { transform: translateY(-2px) scale(1.01); background: linear-gradient(135deg, #b0a1ff, #7966ec); box-shadow: 0 14px 32px rgba(104,85,238,.38), 0 0 20px rgba(139,124,255,.18), inset 0 1px rgba(255,255,255,.35); }
+  .cfy-nav-item { @apply flex h-11 items-center gap-3 px-3 text-sm font-medium text-zinc-400 transition duration-200; border-radius: 12px; }
+  .cfy-nav-item svg { @apply size-[18px] shrink-0 text-zinc-500 transition duration-200; }
+  .cfy-nav-item:hover { @apply bg-white/[.04] text-zinc-100; }
+  .cfy-nav-item:hover svg, .cfy-nav-item-active svg { @apply text-violet-200; filter: drop-shadow(0 0 8px rgba(169,157,255,.32)); }
+  .cfy-nav-item-active { @apply text-white; background: linear-gradient(90deg, rgba(96,57,171,.48), rgba(61,37,111,.45)); box-shadow: inset 3px 0 #a78bfa, inset 0 0 0 1px rgba(169,157,255,.24), 0 0 22px rgba(116,80,230,.11); }
+  .cfy-status { @apply border border-white/[.09] bg-white/[.045] px-2.5 py-1 text-[11px] font-medium text-zinc-400; border-radius: 999px; }
+  .cfy-kpi { @apply relative overflow-hidden rounded-[20px] border border-white/[.1] p-5 transition duration-300; background: linear-gradient(145deg, #16243a, #111a2b); box-shadow: 0 14px 32px rgba(0,0,0,.17), inset 0 1px rgba(255,255,255,.03); }
+  .cfy-kpi::before { content: ""; @apply pointer-events-none absolute -right-12 -top-16 size-40 rounded-full blur-3xl; background: var(--kpi-glow, rgba(139,124,255,.2)); opacity: .65; }
+  .cfy-kpi:hover { border-color: rgba(255,255,255,.18); transform: translateY(-3px) scale(1.01); background: linear-gradient(145deg, #1a2a43, #131f32); box-shadow: 0 22px 42px rgba(0,0,0,.24), 0 0 30px color-mix(in srgb, var(--kpi-glow, #8b7cff) 14%, transparent); }
+  .cfy-kpi::after { content: ""; @apply pointer-events-none absolute bottom-0 left-5 right-5 h-[2px] rounded-full; background: linear-gradient(90deg, var(--kpi-glow, rgba(139,124,255,.75)), transparent); opacity: .9; }
+  .cfy-section-kicker { @apply inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[.17em] text-violet-200/75; }
+  .cfy-section-kicker::before { content: ""; @apply size-1.5 rounded-full bg-current; box-shadow: 0 0 12px currentColor; }
+  .cfy-skeleton { @apply relative isolate overflow-hidden rounded-xl; background: #eceef2; box-shadow: inset 0 1px rgba(255,255,255,.55); contain: paint; }
+  .cfy-skeleton::after { content: ""; @apply pointer-events-none absolute inset-0; background: linear-gradient(100deg, transparent 18%, rgba(255,255,255,.7) 46%, transparent 72%); transform: translate3d(-110%,0,0); animation: cfy-shimmer 1.55s cubic-bezier(.4,0,.2,1) infinite; will-change: transform; }
+  .dark .cfy-skeleton, .cfy-shell .cfy-skeleton { background: #1b1b22; box-shadow: inset 0 1px rgba(255,255,255,.025); }
+  .dark .cfy-skeleton::after, .cfy-shell .cfy-skeleton::after { background: linear-gradient(100deg, transparent 18%, #2a2a35 46%, transparent 72%); }
+  .cfy-skeleton-card { @apply overflow-hidden rounded-2xl border border-black/[.06] bg-white/70 p-5 shadow-sm; }
+  .dark .cfy-skeleton-card, .cfy-shell .cfy-skeleton-card { @apply border-white/[.07]; background: rgba(20,22,31,.76); box-shadow: 0 16px 42px rgba(0,0,0,.14), inset 0 1px rgba(255,255,255,.025); }
+  .cfy-skeleton-group { animation: cfy-skeleton-enter .24s ease-out both; }
+  .cfy-list-row { @apply transition duration-200; }
+  .cfy-list-row:hover { @apply bg-white/[.035]; }
+  .cfy-fade-up { animation: cfy-fade-up .55s var(--cfy-ease) both; }
+  .cfy-fade-up-delay-1 { animation-delay: .06s; }
+  .cfy-fade-up-delay-2 { animation-delay: .12s; }
+  .cfy-fade-up-delay-3 { animation-delay: .18s; }
+  .cfy-command { @apply border border-violet-300/[.14] bg-violet-400/[.08] text-violet-100; border-radius: 10px; box-shadow: 0 0 0 1px rgba(139,124,255,.03) inset; }
+  .cfy-profile { @apply flex items-center gap-2.5 rounded-[16px] border border-white/[.07] bg-white/[.035] p-2.5 transition duration-200; }
+  .cfy-profile:hover { @apply border-white/[.13] bg-white/[.06]; }
+  .cfy-auth-shell { @apply relative grid min-h-svh overflow-hidden; background: radial-gradient(ellipse 55% 56% at 20% 15%, rgba(128,103,255,.12), transparent), #09090b; }
+  .cfy-auth-shell::before { content: ""; @apply pointer-events-none absolute inset-0; background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse at center, black, transparent 75%); }
+  .cfy-auth-panel { @apply relative rounded-[26px] border border-white/[.09] p-7 backdrop-blur-2xl sm:p-9; background: rgba(24,24,27,.82); box-shadow: var(--cfy-shadow-lg), inset 0 1px rgba(255,255,255,.045); }
+  .cfy-auth-orb { @apply absolute rounded-full blur-3xl; background: rgba(139,124,255,.18); }
+  .cfy-table { @apply w-full border-separate border-spacing-y-1 text-sm; }
+  .cfy-table thead { @apply sticky top-0 z-10 bg-[#111114]/90 text-left text-[11px] font-medium uppercase tracking-[.13em] text-zinc-500 backdrop-blur-xl; }
+  .cfy-table th { @apply px-4 py-3; }
+  .cfy-table td { @apply bg-white/[.025] px-4 py-3.5 text-zinc-300 transition duration-200; }
+  .cfy-table tr:hover td { @apply bg-violet-400/[.07]; }
+  .cfy-table td:first-child { @apply rounded-l-xl; }
+  .cfy-table td:last-child { @apply rounded-r-xl; }
+  .cfy-badge { @apply inline-flex items-center gap-1.5 rounded-full border border-white/[.09] bg-white/[.045] px-2.5 py-1 text-[11px] font-medium text-zinc-300; }
+  .cfy-modal { @apply rounded-[24px] border border-white/[.12] bg-[#19191f]/90 p-6 backdrop-blur-2xl; box-shadow: var(--cfy-shadow-lg); }
+  .auth-field { @apply block space-y-2 text-sm font-medium text-zinc-200; }
+  .auth-field small { @apply block text-xs font-normal text-red-300; }
+  .auth-input { @apply h-11 w-full rounded-xl border border-white/[.11] bg-white/[.055] px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 hover:border-white/[.18] focus:border-violet-300/70 focus:bg-white/[.075] focus:ring-4 focus:ring-violet-500/10; box-shadow: inset 0 1px rgba(255,255,255,.025); }
+  .auth-icon { @apply pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-zinc-500; }
+  .auth-submit { @apply mt-2 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold text-white transition focus:outline-none focus:ring-4 focus:ring-violet-500/20 disabled:pointer-events-none disabled:opacity-60; background: #8173ee; box-shadow: 0 10px 28px rgba(104,85,238,.22), inset 0 1px rgba(255,255,255,.24); }
+  .auth-submit:hover { transform: translateY(-1px); background: #9286f5; }
+  /* Assignment creation follows the focused internal-portal canvas, rather than the dashboard-card treatment. */
+  .cfy-assignment-form { @apply my-0 min-h-svh w-full overflow-y-auto bg-[#0b101b] text-[#f6f8fb] sm:m-6 sm:min-h-0 sm:max-h-[calc(100svh-3rem)] sm:max-w-[74rem] sm:rounded-[22px] sm:border sm:border-[#273752]; box-shadow: 0 32px 100px rgba(0, 0, 0, .55); }
+  .cfy-assignment-form-top { @apply sticky top-0 z-10 flex items-start justify-between border-b border-[#263650] bg-[#0d1422]/95 px-6 py-6 backdrop-blur-xl sm:px-10 sm:py-8; }
+  .cfy-assignment-form-body { @apply divide-y divide-[#203048]; }
+  .cfy-assignment-section { @apply px-6 py-8 sm:px-12 sm:py-10; }
+  .cfy-assignment-section-icon { @apply flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#ffe9ee] text-[#ff2a59]; box-shadow: 0 6px 20px rgba(255, 42, 89, .12); }
+  .cfy-assignment-input { @apply h-11 w-full rounded-xl border border-[#293953] bg-[#0d1626] px-3 text-[#edf1f7] outline-none transition placeholder:text-[#70809a] hover:border-[#3a4d6c] focus:border-[#ff3562] focus:ring-4 focus:ring-[#ff3562]/10; }
+  .cfy-assignment-priority { @apply inline-flex h-10 items-center gap-2 rounded-lg border border-[#293953] bg-[#0d1626] px-4 text-sm font-medium text-[#afbacb] transition hover:border-[#4d5c76] hover:text-white; }
+  .cfy-assignment-priority-active { @apply border-[#ff3562]/70 bg-[#ff3562]/10 text-[#fff1f4]; box-shadow: inset 0 0 0 1px rgba(255, 53, 98, .1); }
+  .cfy-assignment-form-footer { @apply sticky bottom-0 flex justify-end gap-3 border-t border-[#263650] bg-[#0d1422]/95 px-6 py-5 backdrop-blur-xl sm:px-12; }
+  .cfy-assignment-close { @apply flex size-10 items-center justify-center rounded-xl border border-[#2a3a54] bg-[#111c2e] text-[#aab7cb] transition hover:border-[#ff3562]/50 hover:bg-[#ff3562]/10 hover:text-[#ff8aa3]; }
+  .cfy-assignment-secondary { @apply inline-flex h-11 items-center justify-center rounded-xl border border-[#2b3c57] bg-[#111a2a] px-4 text-sm font-semibold text-[#c2ccdb] transition hover:bg-[#18243a]; }
+  .cfy-assignment-submit { @apply inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#ff1d55] px-5 text-sm font-semibold text-white transition hover:bg-[#ff3b69] disabled:pointer-events-none disabled:opacity-60; box-shadow: 0 10px 24px rgba(255, 29, 85, .28), inset 0 1px rgba(255, 255, 255, .22); }
+  /* Dense production-board treatment — deliberately flatter than dashboard cards. */
+  .cfy-kanban-page { animation: cfy-fade-up .55s var(--cfy-ease) both; }
+  .cfy-kanban-heading { @apply flex flex-col justify-between gap-5 xl:flex-row xl:items-end; }
+  .cfy-kanban-heading h1 { @apply mt-2 text-3xl font-semibold tracking-[-.055em] text-white sm:text-[2.25rem]; }
+  .cfy-kanban-heading p:not(.cfy-section-kicker) { @apply mt-2 text-sm text-zinc-500; }
+  .cfy-kanban-secondary { @apply inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-[#34445e] bg-[#152038] px-4 text-xs font-semibold text-zinc-200 transition hover:-translate-y-0.5 hover:border-[#526987] hover:bg-[#1a2944]; box-shadow: inset 0 1px rgba(255,255,255,.05), 0 8px 20px rgba(0,0,0,.18); }
+  .cfy-kanban-filterbar { @apply mt-6 flex flex-wrap gap-2 border-y border-white/[.045] bg-white/[.018] py-4; }
+  .cfy-kanban-select { @apply flex h-11 items-center border border-white/[.09] bg-white/[.045] px-3 text-zinc-200 outline-none transition duration-200; border-radius: var(--cfy-radius-sm); box-shadow: inset 0 1px rgba(255,255,255,.045), 0 4px 18px rgba(0,0,0,.09); }
+  .cfy-kanban-select:hover { @apply border-white/[.16] bg-white/[.065]; }
+  .cfy-kanban-select select { @apply max-w-28 bg-transparent text-xs text-zinc-300 outline-none; }
+  .cfy-kanban-scroll { @apply -mx-5 mt-5 overflow-x-auto px-5 pb-5 sm:-mx-8 sm:px-8 xl:-mx-10 xl:px-10; scrollbar-color: rgba(169,157,255,.55) transparent; }
+  .cfy-kanban-board { display: grid; grid-template-columns: repeat(9, minmax(280px, 1fr)); gap: 14px; min-width: 2700px; align-items: start; }
+  .cfy-kanban-column { @apply min-h-[580px] rounded-[18px] border border-[#25334b] p-3 transition duration-200; background: linear-gradient(180deg, #111b2d 0%, #0f1828 100%); box-shadow: inset 0 1px rgba(255,255,255,.028), 0 14px 28px rgba(0,0,0,.16); }
+  .cfy-kanban-column-over { @apply border-violet-300/60 bg-violet-400/[.08]; box-shadow: inset 0 0 0 1px rgba(169,157,255,.18), 0 0 30px rgba(139,124,255,.12); }
+  .cfy-kanban-column > header { @apply flex h-9 items-center gap-2 px-1; }
+  .cfy-kanban-column > header h2 { @apply truncate text-xs font-semibold text-zinc-200; }
+  .cfy-kanban-count { @apply rounded-md bg-[#273651] px-1.5 py-0.5 text-[10px] font-semibold text-zinc-400; }
+  .cfy-kanban-empty { @apply flex min-h-[198px] flex-col items-center justify-center rounded-none bg-[#18233a] px-6 text-center; }
+  .cfy-kanban-empty > span { @apply flex size-14 items-center justify-center rounded-[18px] bg-violet-400/[.13] text-violet-200; }
+  .cfy-kanban-empty strong { @apply mt-4 text-sm font-semibold text-zinc-100; }
+  .cfy-kanban-empty p { @apply mt-1 max-w-[180px] text-[11px] leading-5 text-zinc-500; }
+  .cfy-kanban-add { @apply mt-3 flex h-9 w-full items-center justify-center gap-1 rounded-xl border border-dashed border-violet-300/25 bg-violet-400/[.06] text-[11px] text-violet-200/80 transition hover:border-violet-300/45 hover:bg-violet-400/[.11] hover:text-violet-100; }
+  .cfy-kanban-card { @apply cursor-pointer rounded-[17px] border border-[#3a475d] bg-[#1a263a] p-3.5 transition duration-200; box-shadow: inset 0 1px rgba(255,255,255,.045), 0 10px 24px rgba(0,0,0,.18); }
+  .cfy-kanban-card:hover { @apply -translate-y-0.5 border-[#58677f] bg-[#1d2a40]; box-shadow: inset 0 1px rgba(255,255,255,.06), 0 16px 30px rgba(0,0,0,.28); }
+  .cfy-kanban-card-selected { @apply border-violet-300/70 bg-violet-400/[.11]; box-shadow: 0 0 0 1px rgba(169,157,255,.16), 0 14px 30px rgba(64,46,140,.2); }
+  .cfy-kanban-card h3 { @apply truncate text-sm font-semibold text-zinc-100; }
+  .cfy-kanban-card h3 + p { @apply mt-1 truncate text-[11px] text-violet-200/85; }
+  .cfy-kanban-card h3 + p span { @apply text-zinc-600; }
+  .cfy-card-deliverable { @apply rounded-md bg-[#2a3a58] px-1.5 py-0.5 text-[10px] text-zinc-300; }
+  .cfy-card-link { @apply flex min-h-9 items-center gap-2 rounded-lg bg-[#111b2c] px-2.5 text-[11px] text-zinc-300; }
+  .cfy-card-link > span:first-child { @apply text-violet-300; }
+  .cfy-kanban-card footer { @apply mt-3 flex items-center justify-between; }
+  .cfy-kanban-card footer > div:last-child { @apply flex items-center gap-2 text-[10px] text-zinc-500; }
+  .cfy-kanban-card footer > div:last-child span { @apply inline-flex items-center gap-1; }
+  .cfy-kanban-load { @apply mt-5 flex min-h-80 flex-col items-center justify-center rounded-[18px] border border-white/[.08] bg-white/[.02] p-8 text-center; }
+  .cfy-kanban-load p { @apply mt-3 text-sm text-zinc-300; }
+}
+
+@keyframes cfy-shimmer { to { transform: translate3d(110%,0,0); } }
+@keyframes cfy-skeleton-enter { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .cfy-skeleton::after { animation: none; opacity: .32; transform: translate3d(0,0,0); }
+  .cfy-skeleton-group { animation: none; }
+}
+
+@layer components {
+  .cfy-error-page { @apply relative grid min-h-svh place-items-center overflow-hidden p-4 sm:p-8; background: radial-gradient(ellipse 70% 60% at 52% -10%, rgba(124,92,252,.17), transparent), #0b0b0f; }
+  .cfy-error-card { @apply relative z-10 w-full max-w-2xl overflow-hidden rounded-[28px] border border-white/[.1] px-6 py-7 text-center sm:px-10 sm:py-9; background: rgba(20,20,28,.72); box-shadow: 0 28px 90px rgba(0,0,0,.36), inset 0 1px rgba(255,255,255,.07); backdrop-filter: blur(24px); animation: cfy-error-enter .32s var(--cfy-ease) both; }
+  .cfy-error-card::before { content: ""; @apply pointer-events-none absolute inset-x-10 top-0 h-px; background: linear-gradient(90deg, transparent, rgba(180,164,255,.75), transparent); }
+  .cfy-error-brand { @apply inline-flex items-center gap-2 text-sm text-zinc-300 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-300; }
+  .cfy-error-brand span { @apply grid size-7 place-items-center rounded-lg bg-violet-300 font-bold text-[#171421]; box-shadow: 0 0 24px rgba(124,92,252,.45); }
+  .cfy-error-content { @apply mx-auto mt-9 max-w-md; }
+  .cfy-error-illustration { @apply relative mx-auto grid size-20 place-items-center rounded-[25px] border border-violet-200/[.22] bg-violet-400/[.12] text-violet-100; box-shadow: 0 0 0 9px rgba(124,92,252,.055), 0 0 38px rgba(124,92,252,.18); animation: cfy-error-float 4.8s ease-in-out infinite; }
+  .cfy-error-illustration svg { @apply size-9; }
+  .cfy-error-spark { @apply absolute size-2 rounded-full bg-violet-200; box-shadow: 0 0 14px rgba(196,181,253,.9); }
+  .cfy-error-spark-one { right: -8px; top: 9px; } .cfy-error-spark-two { bottom: 4px; left: -10px; }
+  .cfy-error-code { @apply mt-7 font-mono text-sm font-medium tracking-[.28em] text-violet-200; }
+  .cfy-error-content h1 { @apply mt-3 text-3xl font-semibold tracking-[-.055em] text-white sm:text-4xl; }
+  .cfy-error-description { @apply mx-auto mt-3 max-w-sm text-sm leading-6 text-zinc-400; }
+  .cfy-error-timer, .cfy-error-id { @apply mt-4 text-xs text-zinc-500; } .cfy-error-id code { @apply rounded bg-white/[.06] px-1.5 py-1 text-zinc-400; }
+  .cfy-error-actions { @apply mt-7 flex flex-col justify-center gap-3 sm:flex-row; }
+  .cfy-error-actions a, .cfy-error-actions button { @apply inline-flex h-11 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold outline-none transition duration-200 focus-visible:ring-4 focus-visible:ring-violet-400/25; }
+  .cfy-error-actions svg { @apply size-4; }
+  .cfy-error-primary { @apply text-white; background: linear-gradient(135deg, #8b72ff, #694be7); box-shadow: 0 10px 26px rgba(105,75,231,.3), inset 0 1px rgba(255,255,255,.28); }
+  .cfy-error-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 32px rgba(105,75,231,.4), inset 0 1px rgba(255,255,255,.32); }
+  .cfy-error-secondary { @apply border border-white/[.11] bg-white/[.045] text-zinc-200 hover:border-white/[.2] hover:bg-white/[.075]; }
+  .cfy-error-secondary:hover { transform: translateY(-2px); }
+  .cfy-error-links { @apply mt-9 flex flex-wrap justify-center gap-x-5 gap-y-2 border-t border-white/[.07] pt-5 text-xs text-zinc-500; } .cfy-error-links a { @apply transition hover:text-violet-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-300; }
+  .cfy-error-orb { @apply pointer-events-none absolute rounded-full blur-3xl; } .cfy-error-orb-one { top: -12rem; left: 18%; width: 28rem; height: 28rem; background: rgba(124,92,252,.17); } .cfy-error-orb-two { right: 8%; bottom: -15rem; width: 25rem; height: 25rem; background: rgba(73,184,255,.08); }
+  :root:not(.dark) .cfy-error-page { background: radial-gradient(ellipse 70% 60% at 52% -10%, rgba(124,92,252,.14), transparent), #fafafa; } :root:not(.dark) .cfy-error-card { @apply border-black/[.08]; background: rgba(255,255,255,.76); box-shadow: 0 28px 80px rgba(40,40,70,.12), inset 0 1px rgba(255,255,255,.95); } :root:not(.dark) .cfy-error-brand, :root:not(.dark) .cfy-error-content h1 { @apply text-zinc-900; } :root:not(.dark) .cfy-error-description { @apply text-zinc-600; } :root:not(.dark) .cfy-error-secondary { @apply border-black/[.1] bg-white text-zinc-700 hover:border-black/[.18] hover:bg-zinc-50; } :root:not(.dark) .cfy-error-links { @apply border-black/[.07] text-zinc-500; }
+}
+
+@keyframes cfy-error-enter { from { opacity: 0; transform: translateY(10px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes cfy-error-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .cfy-error-card, .cfy-error-illustration { animation: none; } .cfy-error-primary:hover, .cfy-error-secondary:hover { transform: none; } }
+
+@layer components {
+  .cfy-empty-state { @apply relative flex flex-col items-center justify-center overflow-hidden border border-dashed border-white/[.11] bg-white/[.025] px-6 py-12 text-center; box-shadow: inset 0 1px rgba(255,255,255,.035); animation: cfy-empty-enter .3s var(--cfy-ease) both; }
+  .cfy-empty-state::before { content: ""; @apply pointer-events-none absolute inset-0; background: radial-gradient(circle at 50% 35%, rgba(124,92,252,.13), transparent 10rem); }
+  .cfy-empty-illustration { @apply relative z-10 grid size-20 place-items-center rounded-[26px] border border-violet-200/[.18] bg-violet-400/[.12] text-violet-100; box-shadow: 0 0 0 10px rgba(124,92,252,.05), 0 0 34px rgba(124,92,252,.16); animation: cfy-empty-float 4.8s ease-in-out infinite; }
+  .cfy-empty-illustration svg { @apply size-9; } .cfy-empty-orbit { @apply absolute -inset-2 rounded-[30px] border border-violet-200/[.1]; } .cfy-empty-dot { @apply absolute size-2 rounded-full bg-violet-200; box-shadow: 0 0 14px rgba(196,181,253,.82); } .cfy-empty-dot-one { right: -8px; top: 8px; } .cfy-empty-dot-two { bottom: 6px; left: -9px; }
+  .cfy-empty-state h2 { @apply relative z-10 mt-7 text-xl font-semibold tracking-[-.035em] text-zinc-100; } .cfy-empty-state > p { @apply relative z-10 mt-2 max-w-md text-sm leading-6 text-zinc-500; }
+  .cfy-empty-actions { @apply relative z-10 mt-7 flex flex-col justify-center gap-3 sm:flex-row; } .cfy-empty-actions a, .cfy-empty-actions button { @apply inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold outline-none transition duration-200 focus-visible:ring-4 focus-visible:ring-violet-400/25; } .cfy-empty-actions svg { @apply size-4; }
+  .cfy-empty-primary { @apply text-white; background: linear-gradient(135deg, #8b72ff, #694be7); box-shadow: 0 10px 24px rgba(105,75,231,.27), inset 0 1px rgba(255,255,255,.28); } .cfy-empty-primary:hover, .cfy-empty-secondary:hover { transform: translateY(-2px); } .cfy-empty-secondary { @apply border border-white/[.1] bg-white/[.045] text-zinc-200 hover:border-white/[.18] hover:bg-white/[.075]; }
+  html[data-cfy-theme="light"] .cfy-empty-state { @apply border-black/[.1] bg-white/75; box-shadow: 0 14px 34px rgba(35,50,75,.08); } html[data-cfy-theme="light"] .cfy-empty-state h2 { color: #172033; } html[data-cfy-theme="light"] .cfy-empty-state > p { color: #5f6b7d; } html[data-cfy-theme="light"] .cfy-empty-secondary { @apply border-black/[.1] bg-white text-zinc-700 hover:bg-zinc-50; }
+}
+@keyframes cfy-empty-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cfy-empty-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .cfy-empty-state, .cfy-empty-illustration { animation: none; } .cfy-empty-primary:hover, .cfy-empty-secondary:hover { transform: none; } }
+
+@keyframes cfy-fade-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+
+/* Persisted appearance preferences. These overrides intentionally target the
+   shared product primitives so light mode remains legible across every module. */
+html[data-cfy-motion="reduced"] *, html[data-cfy-motion="reduced"] *::before, html[data-cfy-motion="reduced"] *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+html[data-cfy-density="compact"] .cfy-card-head { padding-top: .8rem; padding-bottom: .8rem; }
+html[data-cfy-density="compact"] .cfy-nav-item { height: 2.35rem; }
+.cfy-primary-button { background: linear-gradient(135deg, var(--cfy-accent), color-mix(in srgb, var(--cfy-accent) 68%, #33226c)) !important; box-shadow: 0 10px 26px color-mix(in srgb, var(--cfy-accent) 28%, transparent), inset 0 1px rgba(255,255,255,.3); }
+.cfy-primary-button:hover { background: var(--cfy-accent) !important; }
+html[data-cfy-theme="light"] {
+  --cfy-bg: #f5f7fb; --cfy-surface: rgba(255,255,255,.94); --cfy-surface-raised: #ffffff; --cfy-surface-soft: rgba(31,41,55,.035); --cfy-border: rgba(30,41,59,.12); --cfy-border-strong: rgba(30,41,59,.18); --cfy-text: #172033; --cfy-text-muted: #5f6b7d; --cfy-text-subtle: #7d8796; --cfy-grid-line: rgba(20,31,51,.045); --cfy-shadow-sm: 0 10px 30px rgba(35,50,75,.08); --cfy-shadow-lg: 0 24px 60px rgba(35,50,75,.14);
+  --background: #f5f7fb; --foreground: #172033; --card: #ffffff; --card-foreground: #172033; --popover: #ffffff; --popover-foreground: #172033; --muted: #eef1f6; --muted-foreground: #5f6b7d; --border: #dbe1ea; --input: #dbe1ea;
+}
+html[data-cfy-theme="light"] body { background: #f5f7fb; color: #172033; background-image: radial-gradient(circle at 74% -14%, color-mix(in srgb, var(--cfy-accent) 14%, transparent), transparent 34rem); }
+html[data-cfy-theme="light"] .cfy-shell { background: radial-gradient(ellipse 72% 38% at 72% -8%, color-mix(in srgb, var(--cfy-accent) 10%, transparent), transparent), #f5f7fb; }
+html[data-cfy-theme="light"] .cfy-sidebar { background: rgba(255,255,255,.92); border-color: rgba(30,41,59,.1); }
+html[data-cfy-theme="light"] .cfy-topbar { background: rgba(255,255,255,.82); border-color: rgba(30,41,59,.1); }
+html[data-cfy-theme="light"] .cfy-card, html[data-cfy-theme="light"] .cfy-kpi { background: rgba(255,255,255,.88); border-color: rgba(30,41,59,.12); box-shadow: 0 14px 32px rgba(35,50,75,.08); }
+html[data-cfy-theme="light"] .cfy-card:hover { background: #fff; border-color: color-mix(in srgb, var(--cfy-accent) 35%, #dbe1ea); }
+html[data-cfy-theme="light"] .cfy-card-head { background: rgba(31,41,55,.018); border-color: rgba(30,41,59,.1); }
+html[data-cfy-theme="light"] .cfy-control, html[data-cfy-theme="light"] .auth-input { background: #fff; color: #172033; border-color: #cfd7e4; box-shadow: inset 0 1px rgba(255,255,255,.8), 0 3px 10px rgba(35,50,75,.04); }
+html[data-cfy-theme="light"] .auth-input::placeholder { color: #7d8796; }
+html[data-cfy-theme="light"] .cfy-nav-item { color: #5f6b7d; }
+html[data-cfy-theme="light"] .cfy-nav-item-active { color: #24204b; background: color-mix(in srgb, var(--cfy-accent) 14%, #fff); box-shadow: inset 3px 0 var(--cfy-accent), inset 0 0 0 1px color-mix(in srgb, var(--cfy-accent) 28%, transparent); }
+html[data-cfy-theme="light"] .cfy-nav-item:hover, html[data-cfy-theme="light"] .cfy-icon-button:hover { color: #172033; background-color: rgba(30,41,59,.05); }
+html[data-cfy-theme="light"] .cfy-settings-workspace { background: #fff !important; border-color: #d4dce8 !important; box-shadow: 0 24px 62px rgba(35,50,75,.12) !important; }
+html[data-cfy-theme="light"] .cfy-settings-workspace > div { border-color: #dce3ed !important; background-color: transparent !important; }
+html[data-cfy-theme="light"] .cfy-settings-workspace [class*="bg-[#172135"], html[data-cfy-theme="light"] .cfy-settings-workspace [class*="bg-[#1c2435"] { background: #f4f6fa !important; }
+html[data-cfy-theme="light"] .cfy-settings-workspace [class*="border-[#2b3b58"], html[data-cfy-theme="light"] .cfy-settings-workspace [class*="border-[#26354e"] { border-color: #d4dce8 !important; }
+html[data-cfy-theme="light"] .cfy-settings-workspace .text-slate-200, html[data-cfy-theme="light"] .cfy-settings-workspace .text-slate-300, html[data-cfy-theme="light"] .cfy-settings-workspace .text-slate-400 { color: #29364c !important; }
+html[data-cfy-theme="light"] .text-white, html[data-cfy-theme="light"] .text-zinc-100 { color: #172033 !important; }
+html[data-cfy-theme="light"] .text-zinc-200, html[data-cfy-theme="light"] .text-zinc-300 { color: #334155 !important; }
+html[data-cfy-theme="light"] .text-zinc-400, html[data-cfy-theme="light"] .text-zinc-500, html[data-cfy-theme="light"] .text-zinc-600 { color: #64748b !important; }

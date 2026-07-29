@@ -1,0 +1,9 @@
+import { Activity } from "lucide-react";
+import { dateValue, stringValue, type DashboardRow } from "@/components/dashboard/dashboard-utils";
+import { EmptyState, WidgetError } from "@/components/dashboard/empty-state";
+import { WidgetSkeleton } from "@/components/dashboard/loading-skeletons";
+
+export function ActivityFeed({ activity, isLoading, isError }: { activity: DashboardRow[]; isLoading: boolean; isError: boolean }) {
+  const entries = [...activity].sort((a, b) => (dateValue(b, ["created_at", "timestamp", "updated_at"])?.getTime() ?? 0) - (dateValue(a, ["created_at", "timestamp", "updated_at"])?.getTime() ?? 0)).slice(0, 6);
+  return <section className="cfy-card"><div className="cfy-card-head"><h2 className="text-sm font-semibold tracking-[-.015em] text-zinc-100">Activity</h2><p className="mt-1 text-xs text-zinc-500">Latest changes in your workspace</p></div>{isLoading ? <WidgetSkeleton rows={5} /> : isError ? <WidgetError /> : !entries.length ? <EmptyState icon={Activity} title="No activity yet" description="Workspace activity will show up here as work progresses." /> : <div className="divide-y divide-white/[.06]">{entries.map((entry, index) => { const created = dateValue(entry, ["created_at", "timestamp", "updated_at"]); return <div className="cfy-list-row flex gap-3 px-5 py-4" key={String(entry.id ?? index)}><span className="mt-1.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-violet-400/13"><span className="size-1.5 rounded-full bg-violet-300 shadow-[0_0_10px_rgba(169,157,255,.95)]" /></span><div className="min-w-0 flex-1"><p className="text-sm leading-5 text-zinc-300">{stringValue(entry, ["description", "message", "action", "event_type"], "Workspace activity updated")}</p><p className="mt-1 text-xs text-zinc-500">{created ? created.toISOString().slice(0, 10) : "No timestamp"}</p></div></div>; })}</div>}</section>;
+}
