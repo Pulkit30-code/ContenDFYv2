@@ -22,7 +22,7 @@ function PasswordInput({ value, onChange, placeholder = "Enter your password", a
 }
 
 export function AuthForm({ mode }: Readonly<{ mode: Mode }>) {
-  const router = useRouter(); const params = useSearchParams(); const [busy, setBusy] = useState(false); const [email, setEmail] = useState(""); const [name, setName] = useState(""); const [password, setPassword] = useState(""); const [confirmPassword, setConfirmPassword] = useState(""); const [remember, setRemember] = useState(true); const [notice, setNotice] = useState<string | null>(() => params.get("reason") === "session-expired" ? "Your session has expired. Please sign in again." : null); const [errors, setErrors] = useState<Record<string, string | undefined>>({});
+  const router = useRouter(); const params = useSearchParams(); const [busy, setBusy] = useState(false); const [email, setEmail] = useState(""); const [name, setName] = useState(""); const [password, setPassword] = useState(""); const [confirmPassword, setConfirmPassword] = useState(""); const [remember, setRemember] = useState(true); const [notice, setNotice] = useState<string | null>(() => params.get("activated") === "true" ? "Your password has been created successfully. Sign in with your invited email." : params.get("reason") === "session-expired" ? "Your session has expired. Please sign in again." : null); const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const next = safeNextPath(params.get("next"));
   const isInvitationSetup = mode === "reset" && params.get("setup") === "invite";
   const authCallback = (destination: string) => {

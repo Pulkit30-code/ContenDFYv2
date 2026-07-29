@@ -1,4 +1,4 @@
-export const AUTH_ROUTES = ["/login", "/signup", "/forgot-password", "/reset-password"] as const;
+export const AUTH_ROUTES = ["/login", "/signup", "/forgot-password", "/reset-password", "/auth/create-password"] as const;
 export const DEFAULT_AUTHENTICATED_ROUTE = "/workspace";
 
 /** Prevent callback and login redirects from becoming open redirects. */

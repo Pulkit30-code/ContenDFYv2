@@ -32,9 +32,16 @@ export const tableNames = [
 export type TableName = (typeof tableNames)[number];
 type Tables = { [K in TableName]: TableShape };
 
+type Functions = {
+  activate_workspace_invitation: {
+    Args: { invitation_id: string; activating_user: string };
+    Returns: Record<string, unknown>;
+  };
+};
+
 export type Database = {
   __InternalSupabase: { PostgrestVersion: "14.5" };
-  public: { Tables: Tables; Views: Record<never, never>; Functions: Record<never, never>; Enums: Record<never, never>; CompositeTypes: Record<never, never> };
+  public: { Tables: Tables; Views: Record<never, never>; Functions: Functions; Enums: Record<never, never>; CompositeTypes: Record<never, never> };
 };
 
 export type TableRow<T extends TableName> = Database["public"]["Tables"][T]["Row"];
