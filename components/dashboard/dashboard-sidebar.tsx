@@ -36,6 +36,7 @@ export function DashboardSidebar({ email }: { email: string | null }) {
   const [workspaceOpen, setWorkspaceOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [createOpen, setCreateOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [workspaceName, setWorkspaceName] = useState("");
   const createWorkspace = useCreateRecord("workspaces");
   const identity = useWorkspaceIdentity();
@@ -64,23 +65,35 @@ export function DashboardSidebar({ email }: { email: string | null }) {
   const utility = (label: string, href: string, Icon: typeof UserRound) => <Link href={href} title={collapsed ? label : undefined} className={navClass(isActive(href))}><Icon /><span className={collapsed ? "sr-only" : ""}>{label}</span>{activeDot(isActive(href))}</Link>;
   const createWorkspaceRecord = async (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); const name = workspaceName.trim(); if (name.length < 2) return toast.error("Enter a workspace name."); try { await createWorkspace.mutateAsync({ name }); toast.success(`${name} workspace created`); setWorkspaceName(""); setCreateOpen(false); setWorkspaceOpen(false); } catch (error) { toast.error(error instanceof Error ? error.message : "Couldn’t create workspace."); } };
   const signOut = async () => { const { error } = await createClient().auth.signOut(); if (error) return toast.error(error.message); router.replace("/login"); router.refresh(); };
-  const closeMobileNavigation = () => {
-    delete document.documentElement.dataset.mobileNav;
-    document.body.style.overflow = "";
-  };
+  const closeMobileNavigation = () => setMobileOpen(false);
   useEffect(() => {
-    closeMobileNavigation();
+    const openMobileNavigation = () => setMobileOpen(true);
+    const mobileViewport = window.matchMedia("(max-width: 1023px)");
+    const ensureExpandedMobileNavigation = (event: MediaQueryListEvent | MediaQueryList) => {
+      if (event.matches) setCollapsed(false);
+    };
+    window.addEventListener("cfy:open-mobile-navigation", openMobileNavigation);
+    mobileViewport.addEventListener("change", ensureExpandedMobileNavigation);
+    return () => {
+      window.removeEventListener("cfy:open-mobile-navigation", openMobileNavigation);
+      mobileViewport.removeEventListener("change", ensureExpandedMobileNavigation);
+    };
+  }, []);
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeMobileNavigation();
+      if (event.key === "Escape") setMobileOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => {
       window.removeEventListener("keydown", onKeyDown);
-      closeMobileNavigation();
+      document.body.style.overflow = previousOverflow;
     };
-  }, [pathname]);
+  }, [mobileOpen]);
 
-  return <div className={`h-0 shrink-0 lg:h-svh ${collapsed ? "lg:w-20" : "lg:w-64"}`}><button type="button" onClick={closeMobileNavigation} aria-label="Close navigation" className="cfy-mobile-nav-backdrop fixed inset-0 z-30 hidden bg-black/65 backdrop-blur-sm lg:hidden" /><aside id="workspace-navigation" className={`cfy-sidebar fixed inset-y-0 left-0 z-40 flex h-svh w-[min(20rem,88vw)] -translate-x-full flex-col overflow-y-auto transition-[transform,width,padding] duration-300 lg:z-30 lg:translate-x-0 lg:overflow-visible ${collapsed ? "lg:w-20 px-2 py-4" : "lg:w-64 px-3 py-4"}`}>
+  return <div className={`h-0 shrink-0 lg:h-svh ${collapsed ? "lg:w-20" : "lg:w-64"}`}><button type="button" onClick={closeMobileNavigation} aria-label="Close navigation" className={`fixed inset-0 z-[110] bg-black/65 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${mobileOpen ? "visible opacity-100" : "invisible pointer-events-none opacity-0"}`} /><aside id="workspace-navigation" aria-label="Workspace navigation" className={`cfy-sidebar fixed inset-y-0 left-0 z-[120] flex h-svh w-[min(20rem,88vw)] flex-col overflow-y-auto transition-[translate,width,padding] duration-300 lg:z-30 lg:translate-x-0 lg:overflow-visible ${mobileOpen ? "translate-x-0" : "-translate-x-full"} ${collapsed ? "lg:w-20 px-2 py-4" : "lg:w-64 px-3 py-4"}`} onClick={(event) => { if ((event.target as HTMLElement).closest("a")) closeMobileNavigation(); }}>
     <div className={`relative flex items-center ${collapsed ? "flex-col gap-3 pt-7" : "gap-2 px-2"}`}>
       <button onClick={() => setWorkspaceOpen((open) => !open)} aria-expanded={workspaceOpen} aria-label="Switch workspace" className={`flex min-w-0 items-center text-left ${collapsed ? "justify-center" : "gap-2"}`}>
         <WorkspaceMark key={identity.workspaceLogoUrl} logoUrl={identity.workspaceLogoUrl} label={identity.workspaceName} />
