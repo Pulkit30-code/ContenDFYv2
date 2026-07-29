@@ -34,17 +34,18 @@ const memberStatus = (row: DashboardRow) => {
 const memberPhoto = (row: DashboardRow) => stringValue(row, ["avatar_url", "photo_url", "image_url"], "");
 const memberKey = (row: DashboardRow) => String(row.id ?? row.team_member_id ?? row.user_id ?? row.profile_id ?? "");
 const memberIdentity = (row: DashboardRow) => String(row.user_id ?? row.profile_id ?? row.email ?? row.email_address ?? memberKey(row));
+const hasMemberIdentity = (row: DashboardRow) => Boolean(stringValue(row, ["name", "full_name", "display_name", "email", "email_address"], "").trim());
 const linked = (row: DashboardRow, key: string) => [row.team_member_id, row.member_id, row.user_id, row.assignee_id, row.profile_id].some((value) => String(value ?? "") === key);
 const workload = (member: DashboardRow, related: DashboardRow[]) => { const stored = Number(member.workload_percentage ?? member.workload ?? member.capacity_used); if (Number.isFinite(stored) && stored > 0) return Math.min(100, stored); return Math.min(100, related.length * 20); };
 
 export function TeamContent({ email }: { email: string | null }) {
   const data = useTeamData();
-  const directMembers = rows(data.members.data);
+  const directMembers = rows(data.members.data).filter(hasMemberIdentity);
   // Some production workspaces use workspace_memberships as the authoritative
   // roster. Merge it in so existing owners are never shown as an empty team.
   const allMembers = useMemo(() => {
     const known = new Set(directMembers.map(memberIdentity));
-    return [...directMembers, ...rows(data.memberships.data).filter((member) => !known.has(memberIdentity(member)))];
+    return [...directMembers, ...rows(data.memberships.data).filter((member) => hasMemberIdentity(member) && !known.has(memberIdentity(member)))];
   }, [data.memberships.data, directMembers]);
   const [search, setSearch] = useState(""); const [role, setRole] = useState("all"); const [status, setStatus] = useState("all"); const [sort, setSort] = useState<Sort>("recent");
   const [inviteOpen, setInviteOpen] = useState(false); const [inviting, setInviting] = useState(false); const [editing, setEditing] = useState<DashboardRow | null>(null); const [selected, setSelected] = useState<DashboardRow | null>(null); const [deleteTarget, setDeleteTarget] = useState<DashboardRow | null>(null);
