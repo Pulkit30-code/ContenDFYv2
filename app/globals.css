@@ -378,3 +378,15 @@ html[data-cfy-theme="light"] .cfy-settings-workspace .text-slate-200, html[data-
 html[data-cfy-theme="light"] .text-white, html[data-cfy-theme="light"] .text-zinc-100 { color: #172033 !important; }
 html[data-cfy-theme="light"] .text-zinc-200, html[data-cfy-theme="light"] .text-zinc-300 { color: #334155 !important; }
 html[data-cfy-theme="light"] .text-zinc-400, html[data-cfy-theme="light"] .text-zinc-500, html[data-cfy-theme="light"] .text-zinc-600 { color: #64748b !important; }
+html[data-cfy-theme="light"] .cfy-calendar .cfy-calendar-panel,
+html[data-cfy-theme="light"] .cfy-calendar [class*="bg-[#101b30]"],
+html[data-cfy-theme="light"] .cfy-calendar [class*="bg-[#142039]"],
+html[data-cfy-theme="light"] .cfy-calendar [class*="bg-[#0d1729]"],
+html[data-cfy-theme="light"] .cfy-calendar [class*="bg-[#111d32]"] {
+  background-color: rgba(255,255,255,.9) !important;
+}
+html[data-cfy-theme="light"] .cfy-calendar [class*="border-[#27344d]"],
+html[data-cfy-theme="light"] .cfy-calendar [class*="border-[#3a4a65]"],
+html[data-cfy-theme="light"] .cfy-calendar [class*="border-[#2d3d58]"] {
+  border-color: rgba(30,41,59,.12) !important;
+}
