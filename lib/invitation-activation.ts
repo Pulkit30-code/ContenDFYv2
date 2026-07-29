@@ -22,7 +22,8 @@ export async function getInvitationActivationState(user: { id: string; email: st
     .maybeSingle();
 
   if (error || !data) return { kind: "invalid", email: user.email };
-  if (data.accepted_at || data.activated_at || data.status === "accepted" || authUser.user.app_metadata.invitation_activation_completed === true) {
+  const activationPending = authUser.user.app_metadata.invitation_activation_pending === true;
+  if (data.activated_at || authUser.user.app_metadata.invitation_activation_completed === true || ((data.accepted_at || data.status === "accepted") && !activationPending)) {
     return { kind: "activated", email: user.email };
   }
   if (data.revoked_at || data.status === "revoked") return { kind: "invalid", email: user.email };
