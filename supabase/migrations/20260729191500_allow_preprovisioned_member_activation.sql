@@ -1,5 +1,6 @@
--- Permit only the server-verified pending -> accepted transition. All normal
--- access-field changes remain restricted to workspace owners and managers.
+-- Some legacy team provisioning triggers mark the member record accepted while
+-- leaving it inactive. Permit activation of that exact pre-provisioned record
+-- only after the workspace invitation has a verified activated timestamp.
 create or replace function private.prevent_team_member_privilege_escalation()
 returns trigger
 language plpgsql
