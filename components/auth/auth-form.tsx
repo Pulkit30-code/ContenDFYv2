@@ -7,7 +7,6 @@ import { Check, Eye, EyeOff, LoaderCircle, LockKeyhole, Mail, UserRound } from "
 import { toast } from "sonner";
 import { z } from "zod";
 import { createClient } from "@/supabase/client";
-import { getPublicSiteUrl } from "@/lib/env";
 import { DEFAULT_AUTHENTICATED_ROUTE, safeNextPath } from "@/lib/auth-routes";
 import { authErrorMessage, logAuthError } from "@/lib/auth-errors";
 import { setRememberMe } from "@/lib/remember-me";
@@ -26,8 +25,7 @@ export function AuthForm({ mode }: Readonly<{ mode: Mode }>) {
   const next = safeNextPath(params.get("next"));
   const isInvitationSetup = mode === "reset" && params.get("setup") === "invite";
   const authCallback = (destination: string) => {
-    const origin = process.env.NODE_ENV === "production" || typeof window === "undefined" ? getPublicSiteUrl() : window.location.origin;
-    const callback = new URL("/auth/callback", origin);
+    const callback = new URL("/auth/callback", window.location.origin);
     callback.searchParams.set("next", destination);
     return callback.toString();
   };

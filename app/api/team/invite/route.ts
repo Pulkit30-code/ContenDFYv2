@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { isSessionExpiredError, requireAuthenticatedServerContext } from "@/lib/auth";
-import { getAppUrl } from "@/lib/env";
 import { hasPermission } from "@/lib/permissions";
 import { createAdminClient } from "@/supabase/server";
 
@@ -58,9 +57,10 @@ export async function POST(request: Request) {
     if (workspaceInvitationError || !workspaceInvitation?.id) return NextResponse.json({ error: workspaceInvitationError?.message ?? "Couldn’t save the workspace invitation." }, { status: 500 });
 
     const admin = createAdminClient();
-    // In local development return to the app instance handling this request,
-    // not a stale configured public URL such as localhost:4173.
-    const redirectOrigin = process.env.NODE_ENV === "production" ? getAppUrl() : "http://localhost:3000";
+    // Use the origin that accepted the invitation request. This makes the
+    // password-creation link work on the live deployment even when an older
+    // deployment is missing NEXT_PUBLIC_SITE_URL.
+    const redirectOrigin = new URL(request.url).origin;
     // Admin invite links return their one-time session in a URL fragment,
     // unlike browser-initiated PKCE flows. The dedicated gate consumes that
     // fragment locally, clears it, then validates the database invitation.

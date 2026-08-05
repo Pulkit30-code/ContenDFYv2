@@ -30,6 +30,7 @@ Never commit `.env.local`, and never expose `SUPABASE_SERVICE_ROLE_KEY` to the b
 
 - `https://your-domain.example/auth/callback`
 - `https://your-domain.example/reset-password`
+- `https://your-domain.example/auth/create-password`
 
 For local development, use `http://localhost:3000` equivalents.
 
@@ -37,6 +38,8 @@ For local development, use `http://localhost:3000` equivalents.
 
 - Configure the same required variables for Preview and Production deployments; use the correct `NEXT_PUBLIC_SITE_URL` for each environment.
 - Apply the versioned SQL in `supabase/migrations/` to the target Supabase project before deployment.
+- Configure custom SMTP (or a Send Email Auth Hook) in Supabase Auth before inviting external teammates. Supabase's default mail provider only delivers Auth emails to organization members, so it cannot deliver production invitations to customer or teammate inboxes.
+- In Supabase Auth, set the Site URL to the production origin and add that origin's `/auth/create-password`, `/auth/callback`, and `/reset-password` paths to Redirect URLs. The invite email template must retain `{{ .ConfirmationURL }}`.
 - The application adds a nonce-based Content Security Policy, HSTS in production, a restrictive Permissions Policy, and standard anti-sniffing/frame headers.
 - Keep the Supabase service-role key server-only. The Supabase URL and anon key are intentionally public and protected by RLS.
 - Confirm Supabase Auth compromised-password protection is enabled in the Auth security dashboard before production release.
